@@ -1,0 +1,19 @@
+{
+  "name": "subscriber-ccx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/functions/*.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@azure/core-auth": "^1.11.0",
+    "@azure/cosmos": "^4.10.0",
+    "@azure/eventgrid-namespaces": "^1.0.0",
+    "@azure/functions": "^4.16.1",
+    "@databricks/sql": "^1.8.0"
+  }
+}
