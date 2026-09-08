@@ -9,7 +9,7 @@ permissions:
 
 # Global configurations environment variables
 env:
-  AZURE_WEBAPP_NAME: 'my-production-app'
+  AZURE_WEBAPP_NAME: 'subexp-pub-func-dev-wus'
   PROJECT_PATH: 'publisher/NotificationEventPublisher'                 # Path to your source code
   NODE_VERSION: '22'              # Runtime environment version
 
