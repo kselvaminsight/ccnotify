@@ -1,17 +1,29 @@
 name: Deploy to Azure
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "newbranch" ]
 
-# Permissions block is required to request the OIDC JWT token from GitHub
 permissions:
   id-token: write
   contents: read
 
+# Global configurations environment variables
+env:
+  AZURE_WEBAPP_NAME: 'my-production-app'
+  PROJECT_PATH: 'publisher/NotificationEventPublisher'                 # Path to your source code
+  NODE_VERSION: '22'              # Runtime environment version
+
 jobs:
-  azure-login:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
       - name: Az CLI Login
         uses: azure/login@v2
         with:
@@ -19,4 +31,11 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           auth-type: IDENTITY
+
+      # Example deployment using the configured environment variables
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          package: ${{ env.PROJECT_PATH }}
 
